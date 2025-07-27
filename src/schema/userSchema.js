@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
         trim: true,//if the user give extra spaces then it will remove the spaces
         maxlength: [20,"first name must be at most 20 characters long"],
     },
-     laastName: {
+     lastName: {
         type: String,
         required: [true,"First name is required"],
         minlength:[5,"first name must be at least 5 characters long"],
@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema({
         minlength: [8,"Password must be at least 8 characters long"],
         maxlength: [20,"Password must be at most 20 characters long"],
     }
+    
+},{
+    timestamps: true,//it will add createdAt and updatedAt fields
     
 });
 
