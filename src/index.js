@@ -3,13 +3,24 @@ const express = require('express');
 
 const ServerConfig = require('./config/ServerConfig');
 const connectDB = require('./config/dbconfig');
+const userRouter = require('./routes/userRoute');
+const cartRouter = require('./routes/cartRouter');
 // const User = require('./schema/userSchema'); // Import the User model
 
 
 const app = express();
+
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({extended: true})); // Parse URL-encoded bodies
+
+app.use('/user',userRouter); // Register the user router
+app.use('/cart', cartRouter); 
+
+app.post('/ping',(req,res)=>{
+    console.log(req.body);
+    return res.json({message:"pong"});
+})
 
 app.listen(ServerConfig.PORT, async ()=>{
     await connectDB();
@@ -27,3 +38,6 @@ app.listen(ServerConfig.PORT, async ()=>{
     // console.log(newUser);
   
 });
+
+//localhost:5500/user/create-post
+//localhost:5500/cart/123456 -GET
